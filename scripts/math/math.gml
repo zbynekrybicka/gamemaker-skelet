@@ -11,3 +11,13 @@ function math_inc(_value, _max = 0, _min = 0)
 		return _value + 1
 	}
 }
+
+
+/**
+ * a_math_distance 1.0.0
+ *
+ * Vrací vzdálenost instance od určeného cíle
+ */
+function math_distance(_target) {
+	return point_distance(x, y, _target.x, _target.y)
+}

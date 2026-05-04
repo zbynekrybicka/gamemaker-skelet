@@ -1,0 +1,2 @@
+realGridX = gridX
+realGridY = gridY

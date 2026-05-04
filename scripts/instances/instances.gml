@@ -18,3 +18,14 @@ function inst_step(_target, _speed){
 function inst_collision(_object, _instance){
 	return instance_place(x, y, _object) == _instance
 }
+
+
+/**
+ * a_inst_move 1.0.0
+ *
+ * Přesune instanci na zvolenou pozici
+ */
+function inst_move(_target) {
+	x = _target.x
+	y = _target.y
+}

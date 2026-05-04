@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"grid_move",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"grid_move",
+  "parent":{
+    "name":"Grid_move",
+    "path":"folders/Grid_move.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
