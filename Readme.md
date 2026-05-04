@@ -5,26 +5,24 @@ Ve snaze zabránit odchylkám to funguje tak, že pokud je vzdálenost vyšší 
 
 ```javascript
 function grid_move() {
-
+	
 	if (!is_real_position()) {
-
-        var _target = grid_move_target()
-
-        show_debug_message(_target)
 		
-        var _distance = math_distance(_target)
+		var _target = grid_move_target()
 		
-        if (_distance >= gridSpeed) {
+		var _distance = math_distance(_target)
+		
+		if (_distance >= gridSpeed) {
 			
-            inst_step(_target, gridSpeed)
-		
-        } else if (_distance > 0) {
+			inst_step(_target, gridSpeed)
 			
-            inst_step(_target, _distance)
-		
-        } else {
+		} else if (_distance > 0) {
 			
-            set_real_position()
+			inst_step(_target, _distance)
+			
+		} else {
+			
+			set_real_position()
 		}
 	}
 }
