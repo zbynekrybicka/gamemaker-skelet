@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"npc_patrol",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"npc_patrol",
+  "parent":{
+    "name":"Patrol",
+    "path":"folders/Objects/Patrol.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
