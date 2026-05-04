@@ -36,7 +36,7 @@ function grid_move() {
 function grid_move_target() {
 	return {
 		x: gridX * gridSize,
-		y: window_get_height() - (gridY + 1) * gridSize
+		y: gridHeight * gridSize - (gridY + 1) * gridSize
 	}
 }
 

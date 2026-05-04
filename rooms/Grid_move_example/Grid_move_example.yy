@@ -1,7 +1,7 @@
 {
   "$GMRoom":"v1",
   "%Name":"Grid_move_example",
-  "creationCodeFile":"",
+  "creationCodeFile":"rooms/Grid_move_example/RoomCreationCode.gml",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
@@ -161,7 +161,7 @@
     "Height":768,
     "inheritRoomSettings":false,
     "persistent":false,
-    "Width":1366,
+    "Width":1344,
   },
   "sequenceId":null,
   "views":[
