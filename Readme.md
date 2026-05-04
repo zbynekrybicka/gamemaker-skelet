@@ -1,11 +1,11 @@
 # GameMaker Skelet
-## a_inst_step 1.0.0
+## a_inst_step 1.1.0
 <p>V rámci jednoho step posune instanci objektu daným směrem požadovanou rychlostí</p>
 
 ```javascript
-function inst_step(_target)
+function inst_step(_target, _speed)
 ```
-## a_inst_collision
+## a_inst_collision 1.0.0
 <p>Testuje, zda se na místě objektu nachází cizí instance zvoleného objektu.</p>
 
 ```javascript
@@ -31,7 +31,7 @@ function npc_patrol(){
 		var _overflow = instance_number(patrolPoint) - 1
 		targetIndex = math_inc(targetIndex, _overflow)
 	}
-	inst_step(_target)
+	inst_step(_target, patrolSpeed)
 
 }
 ```

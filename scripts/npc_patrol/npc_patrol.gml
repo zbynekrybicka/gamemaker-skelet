@@ -12,6 +12,6 @@ function npc_patrol(){
 		var _overflow = instance_number(patrolPoint) - 1
 		targetIndex = math_inc(targetIndex, _overflow)
 	}
-	inst_step(_target)
+	inst_step(_target, patrolSpeed)
 
 }
