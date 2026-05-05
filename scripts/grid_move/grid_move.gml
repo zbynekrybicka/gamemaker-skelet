@@ -1,5 +1,5 @@
 /**
- * m_grid_move 1.0.0
+ * m_grid_move 1.0.1
  *
  * Posunuje instanci na zvolenou pozici na mřížce. Určené pouze pro inkrementaci a dekrementaci aktuální polohy, v případě skoků jde instance vzdušnou čarou.
  * Ve snaze zabránit odchylkám to funguje tak, že pokud je vzdálenost vyšší než počet pixelů, které instance urazí za step, posune se o svoji rychlost, pokud je vzdálenost menší ale ne nulová, posune se pouze o tu vzdálenost.
@@ -8,7 +8,7 @@ function grid_move() {
 	
 	if (!is_real_position()) {
 		
-		var _target = grid_move_target()
+		var _target = grid_move_target(gridX, gridY)
 		
 		var _distance = math_distance(_target)
 		
@@ -23,20 +23,22 @@ function grid_move() {
 		} else {
 			
 			set_real_position()
+			
+			on_grid_control_step_end()
 		}
 	}
 }
 
 
 /**
- * a_grid_move_target 1.0.0
+ * a_grid_move_target 1.0.1
  *
- * Vrací pozici na mřížce v pixelech. Očekává proměnné gridX, gridY a gridSize
+ * Vrací pozici na mřížce v pixelech
  */
-function grid_move_target() {
+function grid_move_target(_x, _y) {
 	return {
-		x: gridX * gridSize,
-		y: gridHeight * gridSize - (gridY + 1) * gridSize
+		x: _x * gridSize,
+		y: gridHeight * gridSize - (_y + 1) * gridSize
 	}
 }
 
@@ -54,7 +56,7 @@ function set_real_position() {
 
 
 /**
- * a_is_real_position
+ * a_is_real_position 1.0.0
  *
  * Testuje, zda realGrid souhlasí s požadovaným grid
  */

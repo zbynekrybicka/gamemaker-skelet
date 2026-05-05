@@ -7,7 +7,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Patrol",
-    "path":"folders/Objects/Patrol.yy",
+    "path":"folders/Patrol.yy",
   },
   "parentObjectId":null,
   "persistent":false,

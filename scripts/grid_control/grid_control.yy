@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"npc_patrol",
+  "%Name":"grid_control",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"npc_patrol",
+  "name":"grid_control",
   "parent":{
-    "name":"Patrol",
-    "path":"folders/Patrol.yy",
+    "name":"Grid_move",
+    "path":"folders/Grid_move.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

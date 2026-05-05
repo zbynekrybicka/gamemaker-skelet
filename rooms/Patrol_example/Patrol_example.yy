@@ -40,7 +40,7 @@
   "name":"Patrol_example",
   "parent":{
     "name":"Patrol_example",
-    "path":"folders/Objects/Patrol/Patrol_example.yy",
+    "path":"folders/Patrol/Patrol_example.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

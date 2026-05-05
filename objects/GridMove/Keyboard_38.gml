@@ -1,3 +1,3 @@
-if (is_real_position()) {
-	gridY++
+if (!get_forward_item(GridMoveWall)) {
+	grid_control_step_forward()
 }
