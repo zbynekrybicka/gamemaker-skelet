@@ -1,13 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"PatrolPoint_3",
+  "%Name":"Kinetic_platform",
   "eventList":[],
   "managed":true,
-  "name":"PatrolPoint_3",
+  "name":"Kinetic_platform",
   "overriddenProperties":[],
   "parent":{
-    "name":"Patrol_example",
-    "path":"folders/Patrol/Patrol_example.yy",
+    "name":"Kinetics_example",
+    "path":"folders/Kinetics/Kinetics_example.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -27,10 +27,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
-  "spriteMaskId":{
-    "name":"Dummy",
-    "path":"sprites/Dummy/Dummy.yy",
+  "spriteId":{
+    "name":"SquareDummy",
+    "path":"sprites/SquareDummy/SquareDummy.yy",
   },
+  "spriteMaskId":null,
   "visible":true,
 }

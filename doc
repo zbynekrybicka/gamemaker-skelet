@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo "# $2"
-for A in $(find $1)
-do
-  node doc.js "$(dox < $A 2> /dev/null)"
-done

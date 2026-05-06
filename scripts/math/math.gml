@@ -35,3 +35,13 @@ function math_dec(_value, _min = 0, _max = 0) {
 function math_distance(_target) {
 	return point_distance(x, y, _target.x, _target.y)
 }
+
+
+/**
+ * a_math_direction 1.0.0
+ *
+ * Vrací směr pohledu z bodu A do budu B
+ */
+function math_direction(_target1, _target2) {
+	return point_direction(_target1.x, _target1.y, _target2.x, _target2.y)
+}

@@ -78,18 +78,13 @@ function grid_move() {
 		
 		var _target = grid_move_target(gridX, gridY)
 		
-		var _distance = math_distance(_target)
-		
-		if (_distance >= gridSpeed) {
-			
-			inst_step(_target, gridSpeed)
-			
-		} else if (_distance > 0) {
-			
-			inst_step(_target, _distance)
-			
+		var _distance = math_distance(_target)		
+		if (_distance > 0) {
+
+			inst_step_to(_target, gridSpeed, _distance)
+
 		} else {
-			
+		
 			set_real_position()
 			
 			on_grid_control_step_end()
@@ -115,11 +110,35 @@ function set_real_position()
 ```javascript
 function is_real_position() 
 ```
-## a_inst_step 1.1.0
+## m_inst_step 1.2.0
+<p>V rámci jednoho step posune instanci objektu směrem k cíli požadovanou rychlostí</p>
+
+```javascript
+function inst_step(_target, _speed){
+	
+	var _position = { x, y }
+	var _dir = math_direction(_position, _target)
+	
+	inst_step_in_direction(_speed, _dir)
+}
+```
+## a_inst_step_in_direction 1.0.0
 <p>V rámci jednoho step posune instanci objektu daným směrem požadovanou rychlostí</p>
 
 ```javascript
-function inst_step(_target, _speed)
+function inst_step_in_direction(_speed, _dir) 
+```
+## m_inst_step_to 1.0.0
+<p>V rámci jednoho step posune instanci objektu smerem k požadovanému cíli a to buď maximální rychlostí nebo o zbývající vzdálenost</p>
+
+```javascript
+function inst_step_to(_target, _speed, _distance) {
+	if (_speed < _distance) {
+		inst_step(_target, _speed)
+	} else {
+		inst_step(_target, _distance)
+	}
+}
 ```
 ## a_inst_collision 1.0.0
 <p>Testuje, zda se na místě objektu nachází cizí instance zvoleného objektu.</p>
@@ -132,6 +151,132 @@ function inst_collision(_object, _instance)
 
 ```javascript
 function inst_move(_target) 
+```
+## m_kinetic_step 1.0.0
+<p>Posune instanci o rychlost horizontálním a vertikálním směrem</p>
+
+```javascript
+function kinetic_step() {
+	var _target = kinetic_next_step()
+	inst_move(_target)
+}
+```
+## a_kinetic_next_step 1.0.0
+<p>Vrátí plánovanou pozici instance v příštím snímku</p>
+
+```javascript
+function kinetic_next_step() 
+```
+## m_kinetic_current_angle 1.0.0
+<p>Vrací aktuální směr pohybu instance</p>
+
+```javascript
+function kinetic_current_angle() {
+	var _position = { x, y }
+	var _target = kinetic_next_step()
+	return math_direction(_position, _target)
+}
+```
+## m_kinetic_is_next_up 1.0.0
+<p>Vrátí, zda předokládaná kolize je směrem nahoru</p>
+
+```javascript
+function kinetic_is_next_collision_up(_object, _more = 0) {
+	
+	var _target = kinetic_next_step()
+	
+	var _instance = instance_place(x, _target.y - _more, _object)
+	if (!_instance) {
+		return infinity
+	}
+	_instance = instance_place(_instance.x, _target.y - _more, _object)
+	var _distance = distance_to_object(_instance)
+	
+	var _isUp = _target.y <= y
+	return _isUp ? _distance : infinity
+}
+```
+## m_kinetic_is_next_down 1.0.0
+<p>Vrátí, zda předokládaná kolize je směrem dolů</p>
+
+```javascript
+function kinetic_is_next_collision_down(_object, _more = 0) {
+	
+	var _target = kinetic_next_step()
+	
+	var _instance = instance_place(x, _target.y + _more, _object)
+	if (!_instance) {
+		return infinity
+	}
+	_instance = instance_place(_instance.x, _target.y + _more, _object)
+	var _distance = distance_to_object(_instance)
+	
+	var _isDown = _target.y >= y
+	return _isDown ? _distance : infinity
+}
+```
+## m_kinetic_is_next_right
+<p>Vrátí, zda předokládaná kolize je směrem doprava</p>
+
+```javascript
+function kinetic_is_next_collision_right(_object, _more = 0) {
+	
+	var _target = kinetic_next_step()
+	
+	var _instance = instance_place(_target.x + _more, y, _object)
+	if (!_instance) {
+		return infinity
+	}
+	_instance = instance_place(_target.x + _more, _instance.y, _object)
+	var _distance = distance_to_object(_instance)
+	var _isRight = _target.x >= x
+	return _isRight ? _distance : infinity
+}
+```
+## m_kinetic_is_next_left
+<p>Vrátí, zda předokládaná kolize je směrem doleva</p>
+
+```javascript
+function kinetic_is_next_collision_left(_object, _more = 0) {
+	
+	var _target = kinetic_next_step()
+	
+	var _instance = instance_place(_target.x - _more, y, _object)
+	if (!_instance) {
+		return infinity
+	}
+	_instance = instance_place(_target.x - _more, _instance.y, _object)
+	var _distance = distance_to_object(_instance)
+	var _isLeft = _target.x <= x
+	return _isLeft ? _distance : infinity
+}
+```
+## m_kinetic_next_collision 1.0.0
+<p>Vrací instanci objektu, se kterou se instance v příštím kroce srazí</p>
+
+```javascript
+function kinetic_next_collision(_object) {
+	var _target = kinetic_next_step()
+	return instance_place(_target.x, _target.y, _object)
+}
+```
+## a_kinetic_gravity 1.0.0
+<p>Zvýší vertikální kinetickou energii o gravitační zrychlení</p>
+
+```javascript
+function kinetic_gravity(_g) 
+```
+## a_kinetic_fire 1.0.0
+<p>Vystřelí instanci směrem a silou podle stanoveného vektoru</p>
+
+```javascript
+function kinetic_fire(_speed, _angle) 
+```
+## a_kinetic_fire_relative 1.0.0
+<p>Změní kinetickou energii podle stanoveného vektoru</p>
+
+```javascript
+function kinetic_fire_relative(_speed, _angle) 
 ```
 ## a_math_inc 1.0.1
 <p>Vrací inkrementovanou hodnotu, pokud odpovídá limitům. Pokud výsledná hodnota překračuje hodnotu max, vrátí hodnotu min.</p>
@@ -152,20 +297,29 @@ function math_dec(_value, _min = 0, _max = 0)
 ```javascript
 function math_distance(_target) 
 ```
+## a_math_direction 1.0.0
+<p>Vrací směr pohledu z bodu A do budu B</p>
+
+```javascript
+function math_direction(_target1, _target2) 
+```
 ## m_npc_patrol 1.0.0
 <p>V rámci jednoho step provádí obsluhu patrolujícího NPC.</p>
 
 ```javascript
 function npc_patrol(){
-	var _target = instance_find(patrolPoint, targetIndex)
+	var _target = targets[targetIndex]
 	
-	var _isCollision = inst_collision(PatrolPoint, _target)
-	if (_isCollision) {
-		
-		var _overflow = instance_number(patrolPoint) - 1
-		targetIndex = math_inc(targetIndex, _overflow)
-	}
-	inst_step(_target, patrolSpeed)
+	var _distance = math_distance(_target)
+	if (_distance > 0) {
+	
+		inst_step_to(_target, patrolSpeed, _distance)
+	
+	} else {
+	
+		var _targetsLength = array_length(targets)
+		targetIndex = math_inc(targetIndex, _targetsLength - 1, 0)
 
+	}
 }
 ```

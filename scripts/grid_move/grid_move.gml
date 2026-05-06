@@ -10,18 +10,13 @@ function grid_move() {
 		
 		var _target = grid_move_target(gridX, gridY)
 		
-		var _distance = math_distance(_target)
-		
-		if (_distance >= gridSpeed) {
-			
-			inst_step(_target, gridSpeed)
-			
-		} else if (_distance > 0) {
-			
-			inst_step(_target, _distance)
-			
+		var _distance = math_distance(_target)		
+		if (_distance > 0) {
+
+			inst_step_to(_target, gridSpeed, _distance)
+
 		} else {
-			
+		
 			set_real_position()
 			
 			on_grid_control_step_end()

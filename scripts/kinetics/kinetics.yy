@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"kinetics",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"kinetics",
+  "parent":{
+    "name":"Kinetics",
+    "path":"folders/Kinetics.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

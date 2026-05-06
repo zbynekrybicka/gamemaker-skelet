@@ -4,14 +4,17 @@
  * V rámci jednoho step provádí obsluhu patrolujícího NPC.
  */
 function npc_patrol(){
-	var _target = instance_find(patrolPoint, targetIndex)
+	var _target = targets[targetIndex]
 	
-	var _isCollision = inst_collision(PatrolPoint, _target)
-	if (_isCollision) {
-		
-		var _overflow = instance_number(patrolPoint) - 1
-		targetIndex = math_inc(targetIndex, _overflow)
-	}
-	inst_step(_target, patrolSpeed)
+	var _distance = math_distance(_target)
+	if (_distance > 0) {
+	
+		inst_step_to(_target, patrolSpeed, _distance)
+	
+	} else {
+	
+		var _targetsLength = array_length(targets)
+		targetIndex = math_inc(targetIndex, _targetsLength - 1, 0)
 
+	}
 }
