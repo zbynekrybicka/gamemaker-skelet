@@ -32,6 +32,10 @@ on_grid_control_about = function() {
 	_set_sprite()
 }
 
+on_grid_control_direction = function() {
+	_set_sprite()
+}
+
 on_grid_control_step_begin = function() {
 
 }

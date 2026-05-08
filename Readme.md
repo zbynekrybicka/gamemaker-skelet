@@ -67,6 +67,12 @@ function get_forward_item(_object) {
 	return place_meeting(_target.x, _target.y, _object)
 }
 ```
+## a_grid_control_direction
+<p>Nastaví směr, kterým se má instance otočit</p>
+
+```javascript
+function grid_control_direction(_direction) 
+```
 ## m_grid_move 1.0.1
 <p>Posunuje instanci na zvolenou pozici na mřížce. Určené pouze pro inkrementaci a dekrementaci aktuální polohy, v případě skoků jde instance vzdušnou čarou.<br />
 Ve snaze zabránit odchylkám to funguje tak, že pokud je vzdálenost vyšší než počet pixelů, které instance urazí za step, posune se o svoji rychlost, pokud je vzdálenost menší ale ne nulová, posune se pouze o tu vzdálenost.</p>
@@ -277,6 +283,66 @@ function kinetic_fire(_speed, _angle)
 
 ```javascript
 function kinetic_fire_relative(_speed, _angle) 
+```
+## m_kinetic_collision_up 1.0.0
+<p>Zastavení stoupání o strop</p>
+
+```javascript
+function kinetic_collision_up() {
+	var _distUp = kinetic_is_next_collision_up(Kinetic_platform)
+	if (_distUp < infinity) {
+		vsp = 0
+	} 
+}
+```
+## m_kinetic_collision_horizontal 1.0.0
+<p>Zastavení pohybu horizontálním směrem o překážku</p>
+
+```javascript
+function kinetic_collision_horizontal() {
+	var _distRight = kinetic_is_next_collision_right(Kinetic_platform, 1)
+	if (_distRight < infinity) {
+		if (_distRight < 1) {
+			hsp = 0
+		} else {
+			hsp = _distRight - 1
+		}
+	}
+	var _distLeft = kinetic_is_next_collision_left(Kinetic_platform, 1)
+	if (_distLeft < infinity) {
+		if (_distLeft < 1) {
+			hsp = 0
+		} else {
+			hsp = -(_distLeft - 1)
+		}
+	}
+}
+```
+## m_kinetic_collision_down 1.0.0
+<p>Volný pád a zastavení o překážku směrem dolů včetně pružnosti a tření</p>
+
+```javascript
+function kinetic_collision_down(_gravity, _springiness = 0, _friction = 1) {
+	var _distDown = kinetic_is_next_collision_down(Kinetic_platform, 0.5)
+	if (_distDown < infinity) {
+		hsp *= _friction
+
+		if (vsp > 1) {
+			vsp = vsp * _springiness
+			if (vsp > 1) {
+				vsp = -vsp
+				return
+			}
+		}
+		
+		if (_distDown < _gravity) {
+			vsp = 0
+		}
+	} else {
+		kinetic_gravity(_gravity)
+	}
+
+}
 ```
 ## a_math_inc 1.0.1
 <p>Vrací inkrementovanou hodnotu, pokud odpovídá limitům. Pokud výsledná hodnota překračuje hodnotu max, vrátí hodnotu min.</p>

@@ -84,3 +84,16 @@ function get_forward_item(_object) {
 	
 	return place_meeting(_target.x, _target.y, _object)
 }
+
+
+/**
+ * a_grid_control_direction
+ *
+ * Nastaví směr, kterým se má instance otočit
+ */
+function grid_control_direction(_direction) {
+	if (_direction >= 0 && _direction <= 3) {
+		gridDirection = _direction
+		on_grid_control_direction()
+	}
+}

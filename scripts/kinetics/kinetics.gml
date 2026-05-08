@@ -112,6 +112,72 @@ function kinetic_is_next_collision_left(_object, _more = 0) {
 	return _isLeft ? _distance : infinity
 }
 
+/**
+ * m_kinetic_collision_horizontal 1.0.0
+ *
+ * Zastavení pohybu horizontálním směrem o překážku
+ */
+function kinetic_collision_horizontal() {
+	var _distRight = kinetic_is_next_collision_right(Kinetic_platform, 1)
+	if (_distRight < infinity) {
+		if (_distRight < 1) {
+			hsp = 0
+		} else {
+			hsp = _distRight - 1
+		}
+	}
+	var _distLeft = kinetic_is_next_collision_left(Kinetic_platform, 1)
+	if (_distLeft < infinity) {
+		if (_distLeft < 1) {
+			hsp = 0
+		} else {
+			hsp = -(_distLeft - 1)
+		}
+	}
+}
+
+
+/**
+ * m_kinetic_collision_up 1.0.0
+ *
+ * Zastavení stoupání o strop
+ */
+function kinetic_collision_up() {
+	var _distUp = kinetic_is_next_collision_up(Kinetic_platform)
+	if (_distUp < infinity) {
+		vsp = 0
+	} 
+}
+
+
+/**
+ * m_kinetic_collision_down 1.0.0
+ *
+ * Volný pád a zastavení o překážku směrem dolů včetně pružnosti a tření
+ */
+function kinetic_collision_down(_gravity, _springiness = 0, _friction = 1) {
+	var _distDown = kinetic_is_next_collision_down(Kinetic_platform, 0.5)
+	if (_distDown < infinity) {
+		hsp *= _friction
+
+		if (vsp > 1) {
+			vsp = vsp * _springiness
+			if (vsp > 1) {
+				vsp = -vsp
+				return
+			}
+		}
+		
+		if (_distDown < _gravity) {
+			vsp = 0
+		}
+	} else {
+		kinetic_gravity(_gravity)
+	}
+}
+
+
+
 
 /**
  * m_kinetic_next_collision 1.0.0
